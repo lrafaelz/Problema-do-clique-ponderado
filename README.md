@@ -17,7 +17,7 @@ Este repositório contém a implementação de três técnicas diferentes para r
 - Descrição da técnica e sua aplicação para resolver o problema do Clique Ponderado. (INSERIR)
 - Detalhes sobre a estrutura do cromossomo e a função de fitness. (INSERIR)
 - Instruções de uso e execução do algoritmo. (INSERIR)
-  
+
 ### Método Guloso:
 
 - Descrição da técnica e sua aplicação para resolver o problema do Clique Ponderado. (INSERIR)
@@ -31,10 +31,9 @@ data/: Diretório para armazenar os arquivos de entrada (csv) com as informaçõ
 results/: Local para armazenar os resultados obtidos pela execução dos algoritmos.
 
 1. Clone o repositório em sua máquina local.
-2. Instale as dependencias presentes em 
+2. Instale as dependencias presentes em `requirements.txt`
 3. Insira os dados do grafo e pesos das arestas no formato adequado dentro do diretório data/.
 4. Execute os algoritmo `app.py`, e escolha a abordagem para a resolução do problema
 5. Os resultados de cada método serão armazenados no diretório results/.
 
 Referências:
-
