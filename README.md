@@ -31,7 +31,13 @@ data/: Diretório para armazenar os arquivos de entrada (csv) com as informaçõ
 results/: Local para armazenar os resultados obtidos pela execução dos algoritmos.
 
 1. Clone o repositório em sua máquina local.
-2. Instale as dependencias presentes em `requirements.txt`
+<!-- inserir bloco de código para facilitar a cópia do comando de instalação dos requirements -->
+2. Instale as dependencias presentes em `requirements.txt` com o comando:
+
+```bash
+  pip install -r requirements.txt
+```
+
 3. Insira os dados do grafo e pesos das arestas no formato adequado dentro do diretório data/.
 4. Execute os algoritmo `app.py`, e escolha a abordagem para a resolução do problema
 5. Os resultados de cada método serão armazenados no diretório results/.
