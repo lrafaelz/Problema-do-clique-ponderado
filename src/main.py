@@ -1,18 +1,90 @@
 import os
-from readCSVGraph import ler_matriz_csv, matriz_para_grafo
-from guloso import encontrar_cliques_gulosos, calcular_peso_clique
+from graph_utils import read_weighted_graph_from_csv_matrix, create_random_matrix
+from draw_utils import draw_graph
+from clique_algorithms import greedy_clique_weighted, ilp_clique_weighted, genetic_clique_weighted
 
+def list_files_in_directory(directory):
+    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    return files
 
+def select_matrix():
+    print("Selecione um grafo ponderado existente ou crie um novo:")
+    print("0. Criar nova matriz")
+    
+    files = list_files_in_directory('data')
+    for idx, file in enumerate(files, start=1):
+        print(f"{idx}. {file}")
+    
+    choice = input("Digite o número da opção desejada: ")
+    
+    if choice == "0":
+        size = int(input("\nDigite o tamanho da matriz: "))
+        lower_bound = float(input("Digite o limite inferior: "))
+        upper_bound = float(input("Digite o limite superior: "))
+        decimal_places = int(input("Digite o número de casas decimais: "))
+        return create_random_matrix(size, lower_bound, upper_bound, decimal_places)
+    else:
+        index = int(choice) - 1
+        if 0 <= index < len(files):
+            return os.path.join('data/', files[index])
+        else:
+            print("\nOpção inválida, por favor selecione uma opção válida.")
+            return select_matrix()
 
+def menu_algorithms():
+    print("Selecione um algoritmo para executar:")
+    print("1. Executar algoritmo Greedy")
+    print("2. Executar algoritmo ILP")
+    print("3. Executar algoritmo Genético")
+    print("4. Rodar todos os algoritmos")
+    print("5. Sair")
+
+    return input("Digite o número da opção desejada: ")
+
+def criar_matriz():
+    size = int(input("Digite o tamanho da matriz: "))
+    lower_bound = float(input("Digite o limite inferior: "))
+    upper_bound = float(input("Digite o limite superior: "))
+    decimal_places = int(input("Digite o número de casas decimais: "))
+    return create_random_matrix(size, lower_bound, upper_bound, decimal_places)
+
+def executar_greedy(G):
+    clique_greedy = greedy_clique_weighted(G)
+    print("Clique encontrado (Greedy):", clique_greedy)
+    draw_graph(G, clique=clique_greedy, filename='results/greedy_clique_weighted.png')
+
+def executar_ilp(G, w):
+    clique_ilp = ilp_clique_weighted(G, w)
+    print("Clique encontrado (ILP):", clique_ilp)
+    draw_graph(G, clique=clique_ilp, filename='results/ilp_clique_weighted.png')
+
+def executar_genetico(G):
+    clique_genetic = genetic_clique_weighted(G)
+    print("Clique encontrado (Genético):", clique_genetic)
+    draw_graph(G, clique=clique_genetic, filename='results/genetic_clique_weighted.png')
+
+def executar_todos(G, w):
+    
+    executar_greedy(G)
+    executar_ilp(G, w)
+    executar_genetico(G)
 
 if __name__ == "__main__":
-    caminho_arquivo = os.path.join(os.path.dirname(__file__), '..\data\grafo_.csv')
-    print(f"Lendo arquivo: {caminho_arquivo}")
-    matriz = ler_matriz_csv(caminho_arquivo)
-    grafo = matriz_para_grafo(matriz)
-    cliques = encontrar_cliques_gulosos(grafo)
-    
-    print("\nCliques encontrados:")
-    for clique in cliques:
-        peso_clique = calcular_peso_clique(grafo, clique)
-        print(f"Clique: {clique}, Peso Total: {peso_clique}")
+    matriz_selecionada = select_matrix()
+    if matriz_selecionada:
+        G, w = read_weighted_graph_from_csv_matrix(matriz_selecionada)
+        while True:
+            option = menu_algorithms()
+
+            if option == "1":
+                executar_greedy(G)
+            elif option == "2":
+                executar_ilp(G, w)
+            elif option == "3":
+                executar_genetico(G)
+            elif option == "4":
+                executar_todos(G, w)
+            elif option == "5":
+                break
+            else:
+                print("Opção inválida, por favor selecione uma opção válida.")

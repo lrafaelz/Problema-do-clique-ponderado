@@ -26,20 +26,42 @@ Este repositório contém a implementação de três técnicas diferentes para r
 
 ## Estrutura do Repositório:
 
-src/: Contém o código-fonte das implementações dos três métodos, da leitura do csv de entrada e o `app.py` que reune as três abordagens.
+```
+Problema-do-clique-ponderado/
+│
+├── data/
+│   └── graph.csv
+│
+├── results/
+│
+├── src/
+│   ├── graph_utils.py
+│   ├── draw_utils.py
+│   ├── clique_algorithms.py
+│   └── main.py
+│
+├── requirements.txt
+└── README.md
+```
+
+src/: Contém o código-fonte das implementações dos três métodos, da leitura do csv de entrada e o `main.py` que reune as três abordagens.
 data/: Diretório para armazenar os arquivos de entrada (csv) com as informações do grafo e pesos das arestas.
 results/: Local para armazenar os resultados obtidos pela execução dos algoritmos.
 
 1. Clone o repositório em sua máquina local.
-<!-- inserir bloco de código para facilitar a cópia do comando de instalação dos requirements -->
-2. Instale as dependencias presentes em `requirements.txt` com o comando:
 
-```bash
-  pip install -r requirements.txt
+```sh
+git clone git@github.com:lrafaelz/Problema-do-clique-ponderado.git
+```
+
+2. Instale as dependências listadas no `requirements.txt`, use o seguinte comando:
+
+```sh
+pip install -r requirements.txt
 ```
 
 3. Insira os dados do grafo e pesos das arestas no formato adequado dentro do diretório data/.
-4. Execute os algoritmo `app.py`, e escolha a abordagem para a resolução do problema
+4. Execute os algoritmo `main.py`, e escolha a abordagem para a resolução do problema
 5. Os resultados de cada método serão armazenados no diretório results/.
 
 Referências:
