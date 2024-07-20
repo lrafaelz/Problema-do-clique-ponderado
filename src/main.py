@@ -22,7 +22,8 @@ def select_matrix():
         lower_bound = float(input("Digite o limite inferior: "))
         upper_bound = float(input("Digite o limite superior: "))
         decimal_places = int(input("Digite o número de casas decimais: "))
-        return create_random_matrix(size, lower_bound, upper_bound, decimal_places)
+        same_function_block_size = int(input("Digite o tamanho do bloco de funcionários com a mesma função\n(quantidade de NULL nas arestas): "))
+        return create_random_matrix(size, lower_bound, upper_bound, decimal_places, same_function_block_size)
     else:
         index = int(choice) - 1
         if 0 <= index < len(files):
@@ -32,7 +33,7 @@ def select_matrix():
             return select_matrix()
 
 def menu_algorithms():
-    print("Selecione um algoritmo para executar:")
+    print("\nSelecione um algoritmo para executar:")
     print("1. Executar algoritmo Greedy")
     print("2. Executar algoritmo ILP")
     print("3. Executar algoritmo Genético")

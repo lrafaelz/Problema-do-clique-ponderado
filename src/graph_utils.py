@@ -40,14 +40,17 @@ def generate_labels(size):
             labels.append(first + second)
     return labels
 
-def create_random_matrix(size, lower_bound, upper_bound, decimal_places):
-    matrix = np.zeros((size, size))
+def create_random_matrix(size, lower_bound, upper_bound, decimal_places, same_function_block_size):
+    matrix = np.zeros((size, size), dtype=object)
 
     for i in range(size):
-        for j in range(i + 1, size):
-            value = round(np.random.uniform(lower_bound, upper_bound), decimal_places)
-            matrix[i, j] = value
-            matrix[j, i] = value
+        for j in range(size):
+            if i == j:
+                matrix[i, j] = 0
+            elif abs(i - j) < same_function_block_size:
+                matrix[i, j] = 'NULL'
+            else:
+                matrix[i, j] = round(np.random.uniform(lower_bound, upper_bound), decimal_places)
 
     labels = generate_labels(size)
     df = pd.DataFrame(matrix, index=labels, columns=labels)
