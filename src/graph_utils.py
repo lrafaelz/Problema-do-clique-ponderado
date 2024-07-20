@@ -44,17 +44,20 @@ def create_random_matrix(size, lower_bound, upper_bound, decimal_places, same_fu
     matrix = np.zeros((size, size), dtype=object)
 
     for i in range(size):
-        for j in range(size):
+        for j in range(i, size):
             if i == j:
                 matrix[i, j] = 0
             elif abs(i - j) < same_function_block_size:
                 matrix[i, j] = 'NULL'
+                matrix[j, i] = 'NULL'
             else:
-                matrix[i, j] = round(np.random.uniform(lower_bound, upper_bound), decimal_places)
+                value = round(np.random.uniform(lower_bound, upper_bound), decimal_places)
+                matrix[i, j] = value
+                matrix[j, i] = value
 
     labels = generate_labels(size)
     df = pd.DataFrame(matrix, index=labels, columns=labels)
     df.to_csv(f'data/matriz_{size}x{size}.csv', index=True, header=True)
 
-    print("Grafo ponderado gerada e exportada com sucesso!")
+    print("Grafo ponderado gerado e exportado com sucesso!")
     return f'data/matriz_{size}x{size}.csv'
