@@ -4,22 +4,23 @@ import numpy as np
 import pandas as pd
 import string
 
+# Função para ler um grafo ponderado a partir de uma matriz em um arquivo CSV
 def read_weighted_graph_from_csv_matrix(file_path):
     G = nx.Graph()
-    # file_path = f'data/{file_path}'
     with open(file_path, 'r') as file:
         reader = csv.reader(file)
-        headers = next(reader)[1:]  # Skip the first column header
+        headers = next(reader)[1:]  # Pula o cabeçalho da primeira coluna
         w = {}
         for i, row in enumerate(reader):
             for j, value in enumerate(row[1:]):
                 if value != 'NULL' and value != '0':
                     G.add_edge(headers[i], headers[j], weight=float(value))
-                    # make a dictionary where ex.: {'a': 1.5, 'b': 3.0...'vertice': weight}
+                    # Cria um dicionário com os pesos dos vértices
                     w[headers[i]] = w.get(headers[i], 0) + float(value)
                     w[headers[j]] = w.get(headers[j], 0) + float(value)
     return G, w
 
+# Função que retorna todas as não-arestas de um grafo
 def notE(V, E):
     nots = []
     for u in V:
@@ -29,6 +30,7 @@ def notE(V, E):
                 nots.append((u, v))
     return nots
 
+# Função para gerar rótulos de vértices de tamanho arbitrário
 def generate_labels(size):
     labels = []
     for i in range(size):
@@ -40,6 +42,7 @@ def generate_labels(size):
             labels.append(first + second)
     return labels
 
+# Função para criar uma matriz aleatória e exportá-la como arquivo CSV
 def create_random_matrix(size, lower_bound, upper_bound, decimal_places, same_function_block_size):
     matrix = np.zeros((size, size), dtype=object)
 

@@ -3,10 +3,12 @@ from graph_utils import read_weighted_graph_from_csv_matrix, create_random_matri
 from draw_utils import draw_graph
 from clique_algorithms import greedy_clique_weighted, ilp_clique_weighted, genetic_clique_weighted
 
+# Função para listar arquivos em um diretório
 def list_files_in_directory(directory):
     files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
     return files
 
+# Função para selecionar ou criar uma matriz
 def select_matrix():
     print("Selecione um grafo ponderado existente ou crie um novo:")
     print("0. Criar nova matriz")
@@ -32,6 +34,7 @@ def select_matrix():
             print("\nOpção inválida, por favor selecione uma opção válida.")
             return select_matrix()
 
+# Função para exibir o menu de algoritmos
 def menu_algorithms():
     print("\nSelecione um algoritmo para executar:")
     print("1. Executar algoritmo Greedy")
@@ -42,6 +45,7 @@ def menu_algorithms():
 
     return input("Digite o número da opção desejada: ")
 
+# Função para criar uma matriz
 def criar_matriz():
     size = int(input("Digite o tamanho da matriz: "))
     lower_bound = float(input("Digite o limite inferior: "))
@@ -49,23 +53,26 @@ def criar_matriz():
     decimal_places = int(input("Digite o número de casas decimais: "))
     return create_random_matrix(size, lower_bound, upper_bound, decimal_places)
 
+# Função para executar o algoritmo Greedy
 def executar_greedy(G):
     clique_greedy = greedy_clique_weighted(G)
     print("Clique encontrado (Greedy):", clique_greedy)
     draw_graph(G, clique=clique_greedy, filename='results/greedy_clique_weighted.png')
 
+# Função para executar o algoritmo ILP
 def executar_ilp(G, w):
     clique_ilp = ilp_clique_weighted(G, w)
     print("Clique encontrado (ILP):", clique_ilp)
     draw_graph(G, clique=clique_ilp, filename='results/ilp_clique_weighted.png')
 
+# Função para executar o algoritmo Genético
 def executar_genetico(G):
     clique_genetic = genetic_clique_weighted(G)
     print("Clique encontrado (Genético):", clique_genetic)
     draw_graph(G, clique=clique_genetic, filename='results/genetic_clique_weighted.png')
 
+# Função para executar todos os algoritmos
 def executar_todos(G, w):
-    
     executar_greedy(G)
     executar_ilp(G, w)
     executar_genetico(G)
