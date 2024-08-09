@@ -6,42 +6,29 @@ Este repositório contém a implementação de três técnicas diferentes para r
 
 ## Técnicas de Resolução:
 
-### Programação Linear Inteira:
-
-- Descrição da técnica e sua aplicação para resolver o problema do Clique Ponderado. (INSERIR)
-- Formulação do problema como um problema de Programação Linear Inteira. (INSERIR)
-- Instruções de uso e execução do algoritmo. (INSERIR)
-
-### Algoritmos Genéticos:
-
-- Descrição da técnica e sua aplicação para resolver o problema do Clique Ponderado. (INSERIR)
-- Detalhes sobre a estrutura do cromossomo e a função de fitness. (INSERIR)
-- Instruções de uso e execução do algoritmo. (INSERIR)
-
-### Método Guloso:
-
-- Descrição da técnica e sua aplicação para resolver o problema do Clique Ponderado. (INSERIR)
-- Explicação da heurística gulosa utilizada. (INSERIR)
-- Instruções de uso e execução do algoritmo. (INSERIR)
+Programação Linear Inteira, Algoritmos Genéticos e Método Guloso.
 
 ## Estrutura do Repositório:
 
 ```
 Problema-do-clique-ponderado/
 │
+├── src/
+│   ├── clique_algorithms.py
+│   ├── draw_utils.py
+│   ├── graph_utils.py
+│   ├── main.py
+│
 ├── data/
-│   └── graph.csv
+│   ├── graph.csv
+│   ├── ...
 │
 ├── results/
+│   ├── ...
 │
-├── src/
-│   ├── graph_utils.py
-│   ├── draw_utils.py
-│   ├── clique_algorithms.py
-│   └── main.py
-│
+├── README.md
 ├── requirements.txt
-└── README.md
+
 ```
 
 src/: Contém o código-fonte das implementações dos três métodos, da leitura do csv de entrada e o `main.py` que reune as três abordagens.
@@ -61,7 +48,12 @@ pip install -r requirements.txt
 ```
 
 3. Insira os dados do grafo e pesos das arestas no formato adequado dentro do diretório data/.
-4. Execute os algoritmo `main.py`, e escolha a abordagem para a resolução do problema
-5. Os resultados de cada método serão armazenados no diretório results/.
+4. Execute os algoritmo `main.py` com o comando abaixo:
+  
+  ```sh
+  python src/main.py
+  ``` 
+    
+5. Escolha o grafo desejado de entrada, ou crie um através da interface.
+6. Escolha a(s) abordagem(ns) para a resolução do problema, os resultados de cada método serão armazenados no diretório results/.
 
-Referências:
